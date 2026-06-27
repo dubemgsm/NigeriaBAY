@@ -26,6 +26,25 @@ def build_dashboard():
     # Get top 10 LGAs by risk_score
     df_sorted = df.sort_values(by="risk_score", ascending=False).head(10)
     
+    # Load Top 10 priority LGAs from outputs/maps/top_10_lgas.csv
+    top_10_csv_path = "/workspaces/NigeriaBAY/outputs/maps/top_10_lgas.csv"
+    if os.path.exists(top_10_csv_path):
+        df_top_10 = pd.read_csv(top_10_csv_path)
+    else:
+        df_top_10 = df_sorted.copy()
+        df_top_10["rank"] = range(1, len(df_top_10) + 1)
+        
+    priority_table_rows = ""
+    for idx, row in df_top_10.iterrows():
+        rank = int(row['rank'])
+        lga = row['LGA']
+        risk_score = float(row['risk_score'])
+        priority_table_rows += f"""                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{rank}</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">{lga}</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; text-align: right;">{risk_score:.4f}</td>
+                        </tr>\n"""
+
     # Generate table rows
     table_rows = ""
     for rank, (idx, row) in enumerate(df_sorted.iterrows(), 1):
@@ -57,9 +76,10 @@ def build_dashboard():
             padding: 0;
         }}
         .dashboard-container {{
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 40px 20px;
+            font-family: Arial, Helvetica, sans-serif;
         }}
         h1 {{
             text-align: center;
@@ -296,7 +316,31 @@ def build_dashboard():
 </head>
 <body>
     <div class="dashboard-container">
-        <h1>Education Disruption Dashboard &ndash; BAY States Nigeria</h1>
+        <h1>Education Disruption Dashboard – BAY States Nigeria</h1>
+        <div style="display:flex; justify-content:space-between; margin:20px 0; gap: 15px;">
+            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
+                <div style="font-size: 24px; font-weight: bold;">{total_idps:,}</div>
+                <div style="font-size: 14px; color: #666; margin-top: 5px;">Total IDPs</div>
+            </div>
+            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
+                <div style="font-size: 24px; font-weight: bold;">{total_schools:,}</div>
+                <div style="font-size: 14px; color: #666; margin-top: 5px;">Total Schools</div>
+            </div>
+            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
+                <div style="font-size: 24px; font-weight: bold;">{closed_percentage:.2f}%</div>
+                <div style="font-size: 14px; color: #666; margin-top: 5px;">Closed Schools (%)</div>
+            </div>
+            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
+                <div style="font-size: 24px; font-weight: bold;">{highest_risk_lga} ({highest_risk_state})</div>
+                <div style="font-size: 14px; color: #666; margin-top: 5px;">Highest Risk LGA</div>
+            </div>
+        </div>
+        <div style="background-color: #f4f6f7; padding: 20px; margin: 20px 0; border-radius: 6px;">
+            <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: bold; font-size: 18px; color: #0f172a;">Key Insight</h3>
+            <p style="margin: 0; line-height: 1.5;">
+                Education disruption is concentrated in a small number of LGAs in Borno State, where conflict intensity, displacement, and school closures overlap.
+            </p>
+        </div>
 
         <!-- 1. KPI Section -->
         <div class="section-wrapper">
@@ -331,24 +375,42 @@ def build_dashboard():
         </div>
 
         <!-- 3. Embedded Map -->
-        <div class="section-wrapper">
-            <div class="section-title">Interactive Education Disruption & Risk Map</div>
-            <div class="map-container">
-                <iframe src="outputs/maps/education_disruption_map.html?v={int(time.time())}" id="map-iframe" title="Education Disruption Map"></iframe>
+        <div style="margin: 40px auto; width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <div class="section-title" style="width: 100%;">Interactive Education Disruption & Risk Map</div>
+            <div class="map-container" style="width: 100%; margin: 0 auto;">
+                <iframe src="outputs/maps/education_disruption_map.html?v={int(time.time())}" id="map-iframe" title="Education Disruption Map" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+
+        <!-- Priority Table Section -->
+        <div style="margin: 30px auto; width: 100%;">
+            <div class="section-title" style="width: 100%;">Top 10 Priority LGAs</div>
+            <div style="overflow-x: auto; width: 100%;">
+                <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;">
+                    <thead>
+                        <tr style="background-color: #f1f5f9;">
+                            <th style="padding: 12px 10px; border: 1px solid #ddd; font-weight: bold; text-align: center; width: 80px;">Rank</th>
+                            <th style="padding: 12px 10px; border: 1px solid #ddd; font-weight: bold; text-align: left;">LGA</th>
+                            <th style="padding: 12px 10px; border: 1px solid #ddd; font-weight: bold; text-align: right; width: 150px;">Risk Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+{priority_table_rows}                    </tbody>
+                </table>
             </div>
         </div>
 
         <!-- 4. Risk Model Section -->
-        <div class="section-wrapper">
+        <div class="section-wrapper" style="margin-top: 40px;">
             <div class="model-box">
                 <div class="model-title">How Risk is Calculated</div>
                 <div class="formula-box">
                     <div class="formula-text">
-                        Risk Score = 30% Conflict + 25% IDP Population + 25% School Closures + 20% School-age Population
+                        Risk Score = 30% Conflict + 25% IDP Population + 25% School Closure Rate + 20% School-age Population
                     </div>
                 </div>
                 <p class="model-explanation">
-                    This model identifies areas where children are most at risk of losing access to education due to overlapping pressures.
+                    This model identifies LGAs where children are most at risk of losing access to education.
                 </p>
             </div>
         </div>
@@ -360,7 +422,7 @@ def build_dashboard():
                 <ol class="usage-steps">
                     <li class="usage-step">Focus on red (high-risk) LGAs</li>
                     <li class="usage-step">Identify LGAs with high IDP population</li>
-                    <li class="usage-step">Check areas with high school closure rates</li>
+                    <li class="usage-step">Examine areas with many closed schools</li>
                     <li class="usage-step">Prioritize these LGAs for intervention</li>
                 </ol>
             </div>
@@ -395,8 +457,8 @@ def build_dashboard():
                 <div class="limitations-title">Limitations</div>
                 <ul class="limitations-list">
                     <li class="limitations-item">School status data may be incomplete</li>
-                    <li class="limitations-item">IDP data may not reflect recent displacement changes</li>
-                    <li class="limitations-item">Some rural LGAs may lack detailed data</li>
+                    <li class="limitations-item">IDP data may not be up-to-date</li>
+                    <li class="limitations-item">Some LGAs may have limited data coverage</li>
                 </ul>
             </div>
         </div>
