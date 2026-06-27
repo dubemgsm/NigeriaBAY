@@ -109,3 +109,14 @@ Our approach centers on a weighted multi-criteria risk model that identifies whe
 *   **Interactive Spatial Map & Dashboard:** A web-based GIS visualization tool showcasing real-time LGA vulnerability levels, conflict density, and school operational status.
 *   **LGA Risk Dataset & Rankings:** A clean, downloadable database containing normalized risk scores and raw parameters for all 65 LGAs.
 *   **Targeted Intervention Strategy:** A detailed deployment plan prescribing LGA-specific activities, timeline schedules, and resource distribution budgets.
+
+### 6. Future Planning & Tactical Scheduling
+To enhance operational safety and resource efficiency, field deployments and travel should be coordinated around temporal risk patterns identified in the conflict data analysis:
+*   **Seasonal Insecurity Windows:** Restrict non-essential field travel and enhance safety measures during months with historically high conflict activity, specifically **January** (10.9% of events), **February** (8.9% of events), and **November** (8.6% of events).
+*   **Holiday Proximity Restrictions:** Enhance security protocols and restrict travel during 7-day windows centered around major public and religious events which exhibit elevated daily conflict intensity:
+    *   **Mawlid (Id el Maulud)** (Avg: 0.93 events/day)
+    *   **Ramadan End (Eve of Fitr)** (Avg: 0.85 events/day)
+    *   **New Year Period** (Avg: 0.84 events/day)
+    *   **Easter Holiday** (Avg: 0.83 events/day)
+    *   **Eid al-Fitr (Id el Fitr)** (Avg: 0.80 events/day)
+*   **Dynamic Adaptation:** Integrate monthly security feeds to keep the index dynamically updated, adjusting field deployments as local conflict corridors shift.

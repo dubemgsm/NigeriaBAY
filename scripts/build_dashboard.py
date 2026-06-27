@@ -588,6 +588,50 @@ def build_dashboard():
         .limitations-item:last-child {{
             margin-bottom: 0;
         }}
+        
+        /* Intro Section Styles */
+        .intro-container {{
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }}
+        .intro-title {{
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }}
+        .intro-text {{
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin: 0;
+        }}
+        .strategy-link-container {{
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 12px;
+        }}
+        .strategy-link {{
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }}
+        .strategy-link:hover {{
+            color: #1d4ed8;
+            text-decoration: underline;
+        }}
     </style>
 </head>
 <body>
@@ -621,7 +665,32 @@ def build_dashboard():
             </div>
         </div>
 
-        <!-- 2. Key Insight -->
+        <!-- 2. Background & About This Analysis -->
+        <div class="section-wrapper">
+            <div class="intro-container">
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 280px;">
+                        <h2 class="intro-title">Background</h2>
+                        <p class="intro-text">
+                            Conflict, displacement, and school closures in North-East Nigeria have severely disrupted access to education. These challenges are concentrated in specific local government areas where vulnerable populations are most affected.
+                        </p>
+                    </div>
+                    <div style="flex: 1; min-width: 280px;">
+                        <h2 class="intro-title">About This Analysis</h2>
+                        <p class="intro-text">
+                            This dashboard identifies priority LGAs where education disruption is most severe by combining conflict data, IDP population, school functionality, and school-age population. It is designed to support rapid, data-driven decision-making. It highlights where immediate interventions should be prioritized.
+                        </p>
+                    </div>
+                </div>
+                <div class="strategy-link-container">
+                    <a href="https://github.com/dubemgsm/NigeriaBAY/blob/main/README.md#strategy-section" target="_blank" class="strategy-link">
+                        View Full Strategy <span style="margin-left: 4px;">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Key Insight -->
         <div class="section-wrapper">
             <div class="insight-box">
                 <div class="insight-title">Key Insight</div>
@@ -631,7 +700,7 @@ def build_dashboard():
             </div>
         </div>
 
-        <!-- 3. Embedded Map -->
+        <!-- 4. Embedded Map -->
         <div style="margin: 40px auto; width: 100%; display: flex; flex-direction: column; align-items: center;">
             <div class="section-title" style="width: 100%; text-align: center;">Interactive Education disruption and Risk map</div>
             <p style="font-size: 15px; color: #475569; margin-top: -10px; margin-bottom: 20px; line-height: 1.5; text-align: center; max-width: 800px;">
@@ -673,7 +742,7 @@ def build_dashboard():
             </div>
         </div>
 
-        <!-- 4. Risk Model Section -->
+        <!-- 5. Risk Model Section -->
         <div class="section-wrapper" style="margin-top: 40px;">
             <div class="model-box">
                 <div class="model-title">How Risk is calculated</div>
@@ -688,7 +757,17 @@ def build_dashboard():
             </div>
         </div>
 
-        <!-- 5. How to Use Section -->
+        <!-- 6. Priority Recommendation -->
+        <div class="section-wrapper">
+            <div class="recommendation-box">
+                <div class="recommendation-title">Priority Recommendation</div>
+                <p class="recommendation-text">
+                    EBI should immediately prioritize education interventions in the following LGAs: <strong>{top_lgas_formatted}</strong>. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
+                </p>
+            </div>
+        </div>
+
+        <!-- 7. How to Use Section -->
         <div class="section-wrapper">
             <div class="usage-box">
                 <div class="usage-title">How to Use This Dashboard</div>
@@ -698,17 +777,6 @@ def build_dashboard():
                     <li class="usage-step">Check IDP concentration and school closures</li>
                     <li class="usage-step">Use this to guide intervention planning</li>
                 </ol>
-            </div>
-        </div>
-
-
-        <!-- Recommended Action Section -->
-        <div class="section-wrapper">
-            <div class="recommendation-box">
-                <div class="recommendation-title">Priority Recommendation</div>
-                <p class="recommendation-text">
-                    EBI should immediately prioritize education interventions in the following LGAs: <strong>{top_lgas_formatted}</strong>. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
-                </p>
             </div>
         </div>
 

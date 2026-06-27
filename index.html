@@ -30,11 +30,11 @@
             font-size: 20px;
             color: #64748b;
             margin-top: 0;
-            margin-bottom: 24px;
+            margin-bottom: 50px;
             font-weight: 600;
         }
         .section-wrapper {
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
         .section-title {
             font-size: 22px;
@@ -53,7 +53,7 @@
         }
         .kpi-box {
             flex: 1;
-            padding: 12px 16px;
+            padding: 24px 20px;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             text-align: center;
@@ -61,10 +61,10 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
         .kpi-value {
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 800;
             color: #2563eb;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             line-height: 1.1;
         }
         .kpi-label {
@@ -77,7 +77,7 @@
 
         /* Key Insight Styles */
         .insight-box {
-            padding: 14px 20px;
+            padding: 24px;
             background-color: #eff6ff;
             border-left: 6px solid #2563eb;
             border-top: 1px solid #dbeafe;
@@ -290,9 +290,8 @@
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            padding: 16px 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 20px 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
         .intro-title {
             font-size: 18px;
@@ -303,29 +302,18 @@
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 6px;
         }
-        .intro-subtitle {
-            font-size: 16px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 6px;
-        }
         .intro-text {
             font-size: 14px;
             color: #475569;
             line-height: 1.6;
-            margin-top: 0;
-            margin-bottom: 12px;
-        }
-        .intro-text:last-child {
-            margin-bottom: 0;
+            margin: 0;
         }
         .strategy-link-container {
-            margin-top: 16px;
+            margin-top: 20px;
             display: flex;
             justify-content: flex-start;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 12px;
         }
         .strategy-link {
             display: inline-flex;
@@ -347,31 +335,6 @@
         <h1>Borno, Adamawa and Yobe (BAY) states, Nigeria</h1>
         <p class="subtitle">Education disruption dashboard</p>
 
-        <!-- Background & About This Analysis Section -->
-        <div class="intro-container">
-            <h2 class="intro-title">Background</h2>
-            <p class="intro-text">
-                School age children in conflict-affected regions of North-East Nigeria (Borno, Adamawa, and Yobe (BAY) states) face severe and uneven barriers to education access. Armed conflict trigged by Boko Haram which means Western Education is prohibited in Hausa language has damaged school infrastructure, displaced millions of people, and created persistent insecurity that limits safe access to existing schools.
-            </p>
-            <p class="intro-text">
-                While education actors, including EBI, maintain strong field presence and local relationships, decision-making about where to prioritise interventions remains constrained by fragmented information flows and limited system-wide visibility.
-            </p>
-            <p class="intro-text">
-                This dashboard provides systemic, data-driven analysis at a glance to suggest priority intervention zones for improved planning.
-            </p>
-
-            <h2 class="intro-subtitle">About This Analysis</h2>
-            <p class="intro-text">
-                This analysis supports data-driven prioritization of education interventions by identifying LGAs where conflict, displacement, and school closures overlap.
-            </p>
-            
-            <div class="strategy-link-container">
-                <a href="README.md" class="strategy-link">
-                    View Full Strategy <span style="margin-left: 4px;">&rarr;</span>
-                </a>
-            </div>
-        </div>
-
         <!-- 1. KPI Section -->
         <div class="section-wrapper">
             <div class="kpi-container">
@@ -380,7 +343,7 @@
                     <div class="kpi-label">Total IDP Population</div>
                 </div>
                 <div class="kpi-box" style="background-color: #fef2f2; border: 1px solid #fca5a5; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.05);">
-                    <div class="kpi-value" style="color: #dc2626;">43.55%</div>
+                    <div class="kpi-value" style="color: #dc2626; font-size: 38px;">43.55%</div>
                     <div class="kpi-label" style="color: #991b1b;">IDPs in Top 5 LGAs</div>
                 </div>
                 <div class="kpi-box">
@@ -392,13 +355,38 @@
                     <div class="kpi-label">Percentage of Closed Schools</div>
                 </div>
                 <div class="kpi-box">
-                    <div class="kpi-value" style="font-size: 20px;">Gwoza (Borno)</div>
+                    <div class="kpi-value" style="font-size: 28px; padding-top: 6px; padding-bottom: 2px;">Gwoza (Borno)</div>
                     <div class="kpi-label">Highest Risk LGA</div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Key Insight -->
+        <!-- 2. Background & About This Analysis -->
+        <div class="section-wrapper">
+            <div class="intro-container">
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 280px;">
+                        <h2 class="intro-title">Background</h2>
+                        <p class="intro-text">
+                            Conflict, displacement, and school closures in North-East Nigeria have severely disrupted access to education. These challenges are concentrated in specific local government areas where vulnerable populations are most affected.
+                        </p>
+                    </div>
+                    <div style="flex: 1; min-width: 280px;">
+                        <h2 class="intro-title">About This Analysis</h2>
+                        <p class="intro-text">
+                            This dashboard identifies priority LGAs where education disruption is most severe by combining conflict data, IDP population, school functionality, and school-age population. It is designed to support rapid, data-driven decision-making. It highlights where immediate interventions should be prioritized.
+                        </p>
+                    </div>
+                </div>
+                <div class="strategy-link-container">
+                    <a href="https://github.com/dubemgsm/NigeriaBAY/blob/main/README.md#strategy-section" target="_blank" class="strategy-link">
+                        View Full Strategy <span style="margin-left: 4px;">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Key Insight -->
         <div class="section-wrapper">
             <div class="insight-box">
                 <div class="insight-title">Key Insight</div>
@@ -408,14 +396,14 @@
             </div>
         </div>
 
-        <!-- 3. Embedded Map -->
+        <!-- 4. Embedded Map -->
         <div style="margin: 40px auto; width: 100%; display: flex; flex-direction: column; align-items: center;">
             <div class="section-title" style="width: 100%; text-align: center;">Interactive Education disruption and Risk map</div>
             <p style="font-size: 15px; color: #475569; margin-top: -10px; margin-bottom: 20px; line-height: 1.5; text-align: center; max-width: 800px;">
                 These areas require intervention where conflict, displacement, and school closures overlap.
             </p>
             <div class="map-container" style="width: 100%; margin: 0 auto;">
-                <iframe src="outputs/maps/education_disruption_map.html?v=1782565953" id="map-iframe" title="Education Disruption Map" style="width: 100%; height: 100%; border: none;"></iframe>
+                <iframe src="outputs/maps/education_disruption_map.html?v=1782571194" id="map-iframe" title="Education Disruption Map" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
 
@@ -550,7 +538,7 @@
             </div>
         </div>
 
-        <!-- 4. Risk Model Section -->
+        <!-- 5. Risk Model Section -->
         <div class="section-wrapper" style="margin-top: 40px;">
             <div class="model-box">
                 <div class="model-title">How Risk is calculated</div>
@@ -565,7 +553,17 @@
             </div>
         </div>
 
-        <!-- 5. How to Use Section -->
+        <!-- 6. Priority Recommendation -->
+        <div class="section-wrapper">
+            <div class="recommendation-box">
+                <div class="recommendation-title">Priority Recommendation</div>
+                <p class="recommendation-text">
+                    EBI should immediately prioritize education interventions in the following LGAs: <strong>Gwoza, Maiduguri, Bama, Jere, Konduga, Damboa, Ngala, Monguno, Dikwa, and Mobbar</strong>. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
+                </p>
+            </div>
+        </div>
+
+        <!-- 7. How to Use Section -->
         <div class="section-wrapper">
             <div class="usage-box">
                 <div class="usage-title">How to Use This Dashboard</div>
@@ -575,17 +573,6 @@
                     <li class="usage-step">Check IDP concentration and school closures</li>
                     <li class="usage-step">Use this to guide intervention planning</li>
                 </ol>
-            </div>
-        </div>
-
-
-        <!-- Recommended Action Section -->
-        <div class="section-wrapper">
-            <div class="recommendation-box">
-                <div class="recommendation-title">Priority Recommendation</div>
-                <p class="recommendation-text">
-                    EBI should immediately prioritize education interventions in the following LGAs: <strong>Gwoza, Maiduguri, Bama, Jere, Konduga, Damboa, Ngala, Monguno, Dikwa, and Mobbar</strong>. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
-                </p>
             </div>
         </div>
 
