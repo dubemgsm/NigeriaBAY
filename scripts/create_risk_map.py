@@ -185,11 +185,11 @@ def create_map_processed():
     for idx, row in df_conflict.iterrows():
         folium.CircleMarker(
             location=[row["latitude"], row["longitude"]],
-            radius=2.0, # Radius adjusted to 2
+            radius=1.5, # Radius adjusted to 1.5
             color="#ff7f0e", # Orange
             fill=True,
             fill_color="#ff7f0e",
-            fill_opacity=0.10,
+            fill_opacity=0.05, # Opacity reduced to 0.05
             weight=0,
             tooltip=f"Conflict Event (Date: {row.get('event_dates', 'Unknown')})"
         ).add_to(conflict_group)
@@ -204,12 +204,12 @@ def create_map_processed():
     for idx, row in df_idp.iterrows():
         folium.CircleMarker(
             location=[row["latitude"], row["longitude"]],
-            radius=5.0, # Radius adjusted to 5
+            radius=3.5, # Radius adjusted to 3.5
             color="#9467bd", # Purple
             fill=True,
             fill_color="#9467bd",
-            fill_opacity=0.8,
-            weight=0.6,
+            fill_opacity=0.45, # Opacity reduced to 0.45
+            weight=0.4,
             edge_color="#ffffff",
             tooltip=f"IDP Site (Population: {int(row.get('idp_population', 0)):,})"
         ).add_to(idp_group)
@@ -226,11 +226,11 @@ def create_map_processed():
         color = "#2ca02c" if status == "Open" else "#d62728" # Green vs Red
         folium.CircleMarker(
             location=[row["latitude"], row["longitude"]],
-            radius=3.0, # Radius adjusted to 3
+            radius=2.0, # Radius adjusted to 2.0
             color=color,
             fill=True,
             fill_color=color,
-            fill_opacity=0.15,
+            fill_opacity=0.10, # Opacity reduced to 0.10
             weight=0.15,
             edge_color="#000000",
             tooltip=f"School in {row.get('lgs_names', 'Unknown')} ({status})",

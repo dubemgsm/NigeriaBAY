@@ -203,7 +203,7 @@
 
         /* Usage Styles */
         .usage-box {
-            padding: 24px;
+            padding: 16px 20px;
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
@@ -213,7 +213,7 @@
             font-size: 18px;
             font-weight: 800;
             color: #0f172a;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
         .usage-steps {
             padding-left: 20px;
@@ -222,8 +222,8 @@
         .usage-step {
             font-size: 14px;
             color: #334155;
-            line-height: 1.8;
-            margin-bottom: 8px;
+            line-height: 1.5;
+            margin-bottom: 4px;
         }
         .usage-step:last-child {
             margin-bottom: 0;
@@ -334,7 +334,7 @@
                 These areas require intervention where conflict, displacement, and school closures overlap.
             </p>
             <div class="map-container" style="width: 100%; margin: 0 auto;">
-                <iframe src="outputs/maps/education_disruption_map.html?v=1782562878" id="map-iframe" title="Education Disruption Map" style="width: 100%; height: 100%; border: none;"></iframe>
+                <iframe src="outputs/maps/education_disruption_map.html?v=1782565953" id="map-iframe" title="Education Disruption Map" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
 
@@ -464,7 +464,7 @@
             </div>
 
             <!-- Data Insight -->
-            <div style="margin: 20px auto 10px auto; text-align: center; font-size: 16px; color: #0f172a; padding: 12px; background-color: #f1f5f9; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <div style="margin: 25px auto 15px auto; text-align: center; font-size: 18px; color: #1e3a8a; padding: 14px; background-color: #eff6ff; border-radius: 8px; border: 1.5px solid #3b82f6; font-weight: bold; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.05);">
                 <strong>Key finding: These top 10 LGAs account for 47.6% of total education disruption risk in the BAY states.</strong>
             </div>
         </div>
@@ -501,9 +501,9 @@
         <!-- Recommended Action Section -->
         <div class="section-wrapper">
             <div class="recommendation-box">
-                <div class="recommendation-title">Recommended Action</div>
+                <div class="recommendation-title">Priority Recommendation</div>
                 <p class="recommendation-text">
-                    EBI should prioritize resource allocation and rapid education response interventions in the identified high-risk LGAs. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
+                    EBI should immediately prioritize education interventions in the following LGAs: <strong>Gwoza, Maiduguri, Bama, Jere, Konduga, Damboa, Ngala, Monguno, Dikwa, and Mobbar</strong>. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
                 </p>
             </div>
         </div>
@@ -512,7 +512,7 @@
         <div class="section-wrapper" style="margin-top: 50px;">
             <div class="section-title">Future planning</div>
             <p style="font-size: 15px; color: #475569; margin-top: 0; margin-bottom: 25px; line-height: 1.6; text-align: left;">
-                Conflict events in high-risk LGAs often show temporal patterns, suggesting opportunities to identify periods of elevated risk. This approach can be extended to support operational planning, enabling EBI teams to adjust field activities based on risk patterns and improve staff safety.
+                Conflict events in high-risk LGAs show temporal patterns, indicating that EBI should prioritize identifying periods of elevated risk. EBI should extend this approach to support operational planning, adjusting field activities based on risk patterns to improve staff safety.
             </p>
             
             <div style="display: flex; gap: 30px; flex-wrap: wrap;">
@@ -725,13 +725,13 @@
             <div style="padding: 16px 20px; background-color: #fef3c7; border-left: 4px solid #d97706; border-radius: 6px; margin-top: 25px;">
                 <div style="font-size: 14px; font-weight: 800; color: #92400e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Operational Recommendation for Field Teams</div>
                 <p style="font-size: 14px; color: #78350f; margin: 0; line-height: 1.5;">
-                    EBI should restrict travel and enhance safety protocols during the 7-day windows centered around the high-risk events (<strong>Mawlid</strong>, <strong>Ramadan End</strong>, <strong>New Year</strong>, <strong>Easter</strong>, and <strong>Eid al-Fitr</strong>) as conflict intensity significantly increases during these periods.
+                    EBI should restrict travel and enhance safety protocols during the 7-day windows centered around the high-risk events (<strong>Mawlid</strong>, <strong>Ramadan End</strong>, <strong>New Year</strong>, <strong>Easter</strong>, and <strong>Eid al-Fitr</strong>) as conflict intensity significantly increases during these periods. This enables field teams to plan deployments around periods of elevated risk and reduce exposure during high-risk windows.
                 </p>
             </div>
         </div>
 
         <!-- 7. Limitations Section -->
-        <div class="section-wrapper" style="margin-bottom: 0;">
+        <div class="section-wrapper" style="margin-bottom: 30px;">
             <div class="limitations-box">
                 <div class="limitations-title">Limitations</div>
                 <ul class="limitations-list">
@@ -739,6 +739,57 @@
                     <li class="limitations-item">IDP data may not reflect recent displacement</li>
                     <li class="limitations-item">Some LGAs may have missing data</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- Data Sources & Metadata Section -->
+        <div class="section-wrapper" style="margin-top: 30px; margin-bottom: 0;">
+            <div style="padding: 20px; background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; text-align: left;">
+                <div style="font-size: 14px; font-weight: 700; color: #64748b; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;">
+                    <span>Data Sources & Metadata</span>
+                    <a href="https://github.com/dubemgsm/NigeriaBAY" target="_blank" style="font-size: 12px; font-weight: 600; color: #2563eb; text-decoration: none; display: flex; align-items: center; gap: 4px; text-transform: none; letter-spacing: normal;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                        GitHub Repository
+                    </a>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 12px; color: #64748b; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #cbd5e1; color: #475569; font-weight: 600;">
+                                <th style="padding: 6px 4px; width: 25%;">Dataset</th>
+                                <th style="padding: 6px 4px; width: 45%;">Source</th>
+                                <th style="padding: 6px 4px; width: 30%;">Date Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 6px 4px; font-weight: 600; color: #475569;">Conflict Events</td>
+                                <td style="padding: 6px 4px;">Armed Conflict Location &amp; Event Data Project (ACLED)</td>
+                                <td style="padding: 6px 4px;">Feb 28, 2003 – Dec 25, 2024</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 6px 4px; font-weight: 600; color: #475569;">IDPs</td>
+                                <td style="padding: 6px 4px;">IOM Displacement Tracking Matrix (DTM) Site Assessment</td>
+                                <td style="padding: 6px 4px;">Mar 13, 2025 – Apr 04, 2025</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 6px 4px; font-weight: 600; color: #475569;">Schools Status</td>
+                                <td style="padding: 6px 4px;">GRID3 / iMMAP Nigeria</td>
+                                <td style="padding: 6px 4px;">2023 – 2024 Baseline</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 6px 4px; font-weight: 600; color: #475569;">Demographics (SADD)</td>
+                                <td style="padding: 6px 4px;">UN OCHA / GRID3 Sex and Age Disaggregated Data</td>
+                                <td style="padding: 6px 4px;">2023 Baseline</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px 4px; font-weight: 600; color: #475569;">Boundaries</td>
+                                <td style="padding: 6px 4px;">UN OCHA Common Operational Datasets (COD)</td>
+                                <td style="padding: 6px 4px;">2023 Baseline</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
