@@ -234,7 +234,7 @@ def create_map_processed():
     # Add Custom HTML Legend
     legend_html = """
      <div style="position: fixed; 
-                 bottom: 20px; left: 15px; width: 135px; height: auto; 
+                 bottom: 50px; left: 15px; width: 135px; height: auto; 
                  border: 1.5px solid #cccccc; z-index: 9999; font-size: 11px;
                  background-color: white;
                  opacity: 0.95;
