@@ -450,7 +450,7 @@ def build_dashboard():
             <div class="visual-card">
                 <h2>Interactive Education Disruption & Risk Map</h2>
                 <div class="map-frame-container">
-                    <iframe src="outputs/maps/education_disruption_map.html" id="map-iframe" title="Education Disruption Map"></iframe>
+                    <iframe src="outputs/maps/education_disruption_map.html" id="map-iframe" title="Education Disruption Map" onload="onIframeLoad()"></iframe>
                 </div>
             </div>
 
@@ -557,6 +557,12 @@ def build_dashboard():
             const scores = top10.map(item => item.risk_score);
 
             updateChart(labels, scores);
+
+            // 5. Update Map State Outlines
+            const mapIframe = document.getElementById("map-iframe");
+            if (mapIframe && mapIframe.contentWindow && typeof mapIframe.contentWindow.highlightState === 'function') {{
+                mapIframe.contentWindow.highlightState(state);
+            }}
         }}
 
         function updateChart(labels, scores) {{
@@ -657,6 +663,15 @@ def build_dashboard():
                         }}
                     }}
                 }});
+            }}
+        }}
+
+        function onIframeLoad() {{
+            const selectEl = document.getElementById("state-select");
+            const state = selectEl ? selectEl.value : "All";
+            const mapIframe = document.getElementById("map-iframe");
+            if (mapIframe && mapIframe.contentWindow && typeof mapIframe.contentWindow.highlightState === 'function') {{
+                mapIframe.contentWindow.highlightState(state);
             }}
         }}
 

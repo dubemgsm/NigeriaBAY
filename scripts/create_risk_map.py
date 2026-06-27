@@ -219,6 +219,56 @@ def create_map_processed():
      """
     m.get_root().html.add_child(folium.Element(legend_html))
 
+    # Create State Boundaries for selection highlighting
+    print("Creating state boundaries...")
+    gdf_states = gdf_merged.dissolve(by="state").reset_index()
+
+    # Add State Boundaries layer
+    state_layer = folium.GeoJson(
+        gdf_states,
+        name="State Boundaries",
+        style_function=lambda x: {
+            "fillColor": "transparent",
+            "color": "#4A5568",
+            "weight": 1.5,
+            "fillOpacity": 0.0
+        },
+        control=False,
+        interactive=False
+    )
+    state_layer.add_to(m)
+
+    # Add Custom JS for dynamic selection highlighting
+    state_layer_name = state_layer.get_name()
+    custom_js = f"""
+    <script>
+    window.highlightState = function(stateName) {{
+        if (typeof {state_layer_name} !== 'undefined') {{
+            {state_layer_name}.eachLayer(function(layer) {{
+                var props = layer.feature.properties;
+                if (stateName !== 'All' && props.state === stateName) {{
+                    layer.setStyle({{
+                        color: '#ff7e5f',
+                        weight: 4.5,
+                        fillColor: 'transparent',
+                        fillOpacity: 0.0
+                    }});
+                    layer.bringToFront();
+                }} else {{
+                    layer.setStyle({{
+                        color: '#4A5568',
+                        weight: 1.5,
+                        fillColor: 'transparent',
+                        fillOpacity: 0.0
+                    }});
+                }}
+            }});
+        }}
+    }};
+    </script>
+    """
+    m.get_root().html.add_child(folium.Element(custom_js))
+
     # Save map
     m.save(output_map)
     print(f"Map saved successfully at {output_map}")
