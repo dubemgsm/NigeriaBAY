@@ -1,6 +1,12 @@
 # Education Disruption and Spatial Risk Vulnerability Index
 ### 📍 Adamawa, Borno, and Yobe (BAY) States, Northeast Nigeria
 
+## Live Dashboard
+
+This project presents an interactive dashboard identifying priority LGAs for education intervention in North-East Nigeria.
+
+🔗 **[Explore the Live Interactive Dashboard](https://dubemgsm.github.io/NigeriaBAY/)**
+
 ---
 
 ## 1. Problem Statement
@@ -71,3 +77,35 @@ All outputs are saved in the project repository:
     *   **Path:** [outputs/maps/top_10_lgas.csv](file:///workspaces/NigeriaBAY/outputs/maps/top_10_lgas.csv)
 4.  **Local Landing Page Portal:**
     *   **Path:** [index.html](file:///workspaces/NigeriaBAY/index.html) (Serves as the main dashboard containing the embedded map and direct links to the CSV downloads).
+
+---
+
+## Strategy Section
+
+### 1. Context
+Over a decade of instability and conflict has severely impacted the education sector in Northeast Nigeria’s Adamawa, Borno, and Yobe (BAY) states. The crisis has resulted in widespread school closures, mass population displacement, and compromised safety, leaving hundreds of thousands of children without access to quality education. To address these challenges systematically, the Education Disruption and Spatial Risk Vulnerability Index has been developed. By consolidating geographic, demographic, and operational data, the platform provides a rigorous, empirical base to guide strategic interventions.
+
+### 2. Objectives
+*   **Quantify Spatial Vulnerability:** Establish a localized, LGA-level spatial index mapping educational disruption and security risk.
+*   **Target Critical Areas:** Guide the mobilization and allocation of resources to the most affected communities to maximize intervention efficacy.
+*   **Coordinate Multi-Sectoral Response:** Support humanitarian actors in planning school rehabilitation, launching temporary learning centers, and integrating displaced children.
+
+### 3. Approach
+Our approach centers on a weighted multi-criteria risk model that identifies where education infrastructure, demographics, displacement, and safety pressures overlap. The index evaluates all 65 LGAs in the BAY states based on four indicators:
+*   **Conflict Intensity (30% weight):** Assesses the density and frequency of active security incidents (ACLED data) affecting community safety.
+*   **IDP Density (25% weight):** Integrates internally displaced person counts (IOM DTM data) to capture high-demand areas.
+*   **School Closure Rate (25% weight):** Measures direct impacts on the educational system by tracking non-operational schools.
+*   **School-Age Density (20% weight):** Adjusts for the underlying child demographics (SADD data) to ensure interventions match population scale.
+
+**Prioritization Framework:** Resource allocation is optimized by targeting high-risk LGAs. The top 10 highest-risk LGAs (including Gwoza, Maiduguri, Bama, Jere, and Konduga, all located in Borno State) account for **47.6%** of the region's total education disruption risk. Directing interventions to these high-risk areas ensures the most vulnerable populations are reached first.
+
+### 4. Proposed Activities
+*   **Prioritized Resource Deployment:** Channel supplies, funding, and teaching staff to the top 10 priority LGAs, starting with highest-vulnerability areas like Gwoza and Bama.
+*   **Rehabilitation of Closed Schools:** Coordinate safe school reopening plans with security agencies and community leaders in LGAs where school closure rates are high but security conditions are stabilizing.
+*   **IDP Education Support:** Set up temporary learning spaces (TLS) and psychosocial support services in dense displacement hubs such as Maiduguri, Jere, and Monguno.
+*   **Risk-Informed Scheduling:** Plan field travel, supply distribution, and community engagement according to temporal conflict trends, minimizing operations during months with historically elevated conflict patterns (e.g., January, February, and November).
+
+### 5. Deliverables
+*   **Interactive Spatial Map & Dashboard:** A web-based GIS visualization tool showcasing real-time LGA vulnerability levels, conflict density, and school operational status.
+*   **LGA Risk Dataset & Rankings:** A clean, downloadable database containing normalized risk scores and raw parameters for all 65 LGAs.
+*   **Targeted Intervention Strategy:** A detailed deployment plan prescribing LGA-specific activities, timeline schedules, and resource distribution budgets.
