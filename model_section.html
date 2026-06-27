@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Risk is Calculated</title>
+    <style>
+        .model-container {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 20px 0;
+        }
+        .model-box {
+            padding: 24px;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .model-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 12px;
+        }
+        .formula-box {
+            background-color: #f7fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .formula-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .formula-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .formula-item {
+            padding-left: 8px;
+        }
+        .model-explanation {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="model-container">
+        <div class="model-box">
+            <div class="model-title">How Risk is Calculated</div>
+            <div class="formula-box">
+                <div class="formula-title">Risk Score =</div>
+                <ul class="formula-list">
+                    <li class="formula-item">&bull; 30% Conflict +</li>
+                    <li class="formula-item">&bull; 25% IDP Population +</li>
+                    <li class="formula-item">&bull; 25% School Closure Rate +</li>
+                    <li class="formula-item">&bull; 20% School-age Population</li>
+                </ul>
+            </div>
+            <p class="model-explanation">
+                This model identifies areas where children are most at risk of losing access to education.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

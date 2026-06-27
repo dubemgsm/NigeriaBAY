@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Summary</title>
+    <style>
+        .kpi-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 20px 0;
+        }
+        .kpi-box {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .kpi-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+        .kpi-label {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="kpi-container">
+        <div class="kpi-box">
+            <div class="kpi-value">2,061,563</div>
+            <div class="kpi-label">Total IDPs</div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-value">2,152</div>
+            <div class="kpi-label">Total Schools</div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-value">13.89%</div>
+            <div class="kpi-label">% Closed Schools</div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-value">Gwoza (Borno)</div>
+            <div class="kpi-label">Highest Risk LGA</div>
+        </div>
+    </div>
+</body>
+</html>

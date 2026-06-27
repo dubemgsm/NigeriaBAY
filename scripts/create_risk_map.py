@@ -32,6 +32,7 @@ def create_map_processed():
     
     # Load summary metrics (from data/processed)
     df_metrics = pd.read_csv(summary_csv)
+    top_10_lgas = df_metrics.nlargest(10, "risk_score")["LGA"].tolist()
     
     # Merge boundaries with summary metrics
     print("Merging boundaries with summary metrics...")
@@ -75,15 +76,31 @@ def create_map_processed():
     colormap.caption = "Normalized LGA Risk Score (0 = Low, 1 = High)"
     m.add_child(colormap)
 
-
+    # Add Map Title
+    title_html = """
+    <div style="position: fixed; 
+                top: 15px; left: 50%; transform: translateX(-50%); width: auto; height: auto; 
+                z-index: 9999; font-size: 20px; font-weight: bold;
+                background-color: rgba(255, 255, 255, 0.85);
+                padding: 10px 20px;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                border-radius: 8px;
+                border: 1px solid #cccccc;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                text-align: center;
+                pointer-events: none;">
+        Education Disruption Risk Map &ndash; BAY States
+    </div>
+    """
+    m.get_root().html.add_child(folium.Element(title_html))
     
-    # Style function for risk score choropleth
+    # Style function for risk score choropleth (lighter grey outline for normal LGAs)
     def style_fn(feature):
         score = feature["properties"]["risk_score"]
         return {
             "fillColor": colormap(score) if pd.notnull(score) else "#ececec",
-            "color": "#000000", # Black outline
-            "weight": 1.2,
+            "color": "#777777",
+            "weight": 0.8,
             "fillOpacity": 0.55
         }
         
@@ -99,8 +116,8 @@ def create_map_processed():
         gdf_merged,
         style_function=lambda x: {
             "fillColor": "transparent",
-            "color": "#000000", # Black outline
-            "weight": 1.2,
+            "color": "#777777",
+            "weight": 0.8,
             "fillOpacity": 0.0
         },
         control=False,
@@ -114,8 +131,8 @@ def create_map_processed():
         style_function=style_fn,
         highlight_function=highlight_fn,
         tooltip=folium.GeoJsonTooltip(
-            fields=["LGA", "state", "risk_score_disp", "school_age_population", "idp_population", "closed_schools"],
-            aliases=["LGA Name:", "State:", "Risk Score (0-1):", "School-Age Pop:", "IDP Pop:", "Closed Schools:"],
+            fields=["LGA", "risk_score_disp", "idp_population", "closed_schools"],
+            aliases=["LGA Name:", "Risk Score:", "IDP Population:", "Closed Schools:"],
             localize=True,
             sticky=False,
             labels=True,
@@ -128,6 +145,21 @@ def create_map_processed():
                 border-radius: 4px;
             """
         )
+    ).add_to(m)
+
+    # Highlight top 10 LGAs: add a thick black border layer on top
+    gdf_top10 = gdf_merged[gdf_merged["LGA"].isin(top_10_lgas)]
+    folium.GeoJson(
+        gdf_top10,
+        name="Top 10 High-Risk LGAs Outline",
+        style_function=lambda x: {
+            "fillColor": "transparent",
+            "color": "#000000",
+            "weight": 3.0,
+            "fillOpacity": 0.0
+        },
+        control=False,
+        interactive=False
     ).add_to(m)
 
     # --------------------------------------------------------------------------
@@ -202,14 +234,14 @@ def create_map_processed():
     # Add Custom HTML Legend
     legend_html = """
      <div style="position: fixed; 
-                 bottom: 50px; left: 50px; width: 200px; height: 140px; 
-                 border: 2px solid #999999; z-index: 9999; font-size: 13px;
+                 bottom: 20px; left: 15px; width: 135px; height: auto; 
+                 border: 1.5px solid #cccccc; z-index: 9999; font-size: 11px;
                  background-color: white;
-                 opacity: 0.9;
-                 padding: 10px;
-                 font-family: sans-serif;
-                 border-radius: 6px;
-                 box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
+                 opacity: 0.95;
+                 padding: 8px;
+                 font-family: 'Helvetica Neue', Arial, sans-serif;
+                 border-radius: 4px;
+                 box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
      &nbsp;<b>Marker Legend</b><br>
      &nbsp;<i class="fa fa-circle fa-1x" style="color:#2ca02c"></i>&nbsp;&nbsp;Schools (Open)<br>
      &nbsp;<i class="fa fa-circle fa-1x" style="color:#d62728"></i>&nbsp;&nbsp;Schools (Closed)<br>
