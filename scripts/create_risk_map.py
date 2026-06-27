@@ -185,11 +185,11 @@ def create_map_processed():
     for idx, row in df_conflict.iterrows():
         folium.CircleMarker(
             location=[row["latitude"], row["longitude"]],
-            radius=1.5, # Radius adjusted to 1.5
-            color="#ff7f0e", # Orange
+            radius=2.0, # Radius adjusted to 2.0
+            color="#2563eb", # Blue
             fill=True,
-            fill_color="#ff7f0e",
-            fill_opacity=0.05, # Opacity reduced to 0.05
+            fill_color="#2563eb",
+            fill_opacity=0.15, # Opacity adjusted for visibility
             weight=0,
             tooltip=f"Conflict Event (Date: {row.get('event_dates', 'Unknown')})"
         ).add_to(conflict_group)
@@ -256,7 +256,7 @@ def create_map_processed():
      &nbsp;<i class="fa fa-circle fa-1x" style="color:#2ca02c"></i>&nbsp;&nbsp;Schools (Open)<br>
      &nbsp;<i class="fa fa-circle fa-1x" style="color:#d62728"></i>&nbsp;&nbsp;Schools (Closed)<br>
      &nbsp;<i class="fa fa-circle fa-1x" style="color:#9467bd"></i>&nbsp;&nbsp;IDPs (Purple)<br>
-     &nbsp;<i class="fa fa-circle fa-1x" style="color:#ff7f0e"></i>&nbsp;&nbsp;Conflict (Orange)<br>
+     &nbsp;<i class="fa fa-circle fa-1x" style="color:#2563eb"></i>&nbsp;&nbsp;Conflict (Blue)<br>
      </div>
      """
     m.get_root().html.add_child(folium.Element(legend_html))
