@@ -77,23 +77,7 @@ def create_map_processed():
     colormap.caption = "Normalized LGA Risk Score (0 = Low, 1 = High)"
     m.add_child(colormap)
 
-    # Add Map Title
-    title_html = """
-    <div style="position: fixed; 
-                top: 15px; left: 50%; transform: translateX(-50%); width: auto; height: auto; 
-                z-index: 9999; font-size: 20px; font-weight: bold;
-                background-color: rgba(255, 255, 255, 0.85);
-                padding: 10px 20px;
-                font-family: 'Helvetica Neue', Arial, sans-serif;
-                border-radius: 8px;
-                border: 1px solid #cccccc;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                text-align: center;
-                pointer-events: none;">
-        Education Disruption Risk Map &ndash; BAY States
-    </div>
-    """
-    m.get_root().html.add_child(folium.Element(title_html))
+    # Map Title removed as requested
     
     # Style function for risk score choropleth (lighter grey outline for normal LGAs)
     def style_fn(feature):
