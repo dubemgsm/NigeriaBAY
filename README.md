@@ -1,5 +1,5 @@
 # Education Disruption and Spatial Risk Vulnerability Index
-### 📍 Adamawa, Borno, and Yobe (BAY) States, Northeast Nigeria
+### Adamawa, Borno, and Yobe (BAY) States, Northeast Nigeria
 
 ## Live Dashboard
 
