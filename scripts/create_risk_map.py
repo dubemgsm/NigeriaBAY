@@ -20,6 +20,7 @@ def create_map_processed():
     summary_csv = os.path.join(processed_dir, "nga_bay_lga_summary.csv")
     
     output_map = os.path.join(output_dir, "education_risk_map.html")
+    output_map_disruption = os.path.join(output_dir, "education_disruption_map.html")
     
     if not all(os.path.exists(f) for f in [lga_shp, summary_csv, conflict_csv, schools_csv, idp_csv]):
         print("Missing required spatial or tabular files for mapping.")
@@ -155,14 +156,14 @@ def create_map_processed():
         style_function=lambda x: {
             "fillColor": "transparent",
             "color": "#000000",
-            "weight": 4.5,
+            "weight": 6.5,
             "fillOpacity": 0.0
         },
         control=False,
         interactive=False
     ).add_to(m)
 
-    # Add text labels for top 5 LGAs
+    # Add text labels for top 5 LGAs (showing LGA name only)
     gdf_top5 = gdf_merged.sort_values(by="risk_score", ascending=False).head(5)
     for rank, (idx, row) in enumerate(gdf_top5.iterrows(), 1):
         centroid = row.geometry.representative_point()
@@ -172,7 +173,7 @@ def create_map_processed():
                 html=f"""
                 <div style="
                     font-family: 'Helvetica Neue', Arial, sans-serif;
-                    font-size: 11px;
+                    font-size: 12px;
                     font-weight: 900;
                     color: #000000;
                     text-align: center;
@@ -181,7 +182,7 @@ def create_map_processed():
                     text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff,
                                  -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
                 ">
-                    #{rank} {row['LGA']}
+                    {row['LGA']}
                 </div>
                 """
             )
@@ -204,7 +205,7 @@ def create_map_processed():
             color="#ff7f0e", # Orange
             fill=True,
             fill_color="#ff7f0e",
-            fill_opacity=0.25,
+            fill_opacity=0.10,
             weight=0,
             tooltip=f"Conflict Event (Date: {row.get('event_dates', 'Unknown')})"
         ).add_to(conflict_group)
@@ -245,8 +246,8 @@ def create_map_processed():
             color=color,
             fill=True,
             fill_color=color,
-            fill_opacity=0.35,
-            weight=0.3,
+            fill_opacity=0.15,
+            weight=0.15,
             edge_color="#000000",
             tooltip=f"School in {row.get('lgs_names', 'Unknown')} ({status})",
             popup=folium.Popup(f"<b>School Status:</b> {status}", max_width=150)
@@ -328,7 +329,8 @@ def create_map_processed():
 
     # Save map
     m.save(output_map)
-    print(f"Map saved successfully at {output_map}")
+    m.save(output_map_disruption)
+    print(f"Map saved successfully at {output_map} and {output_map_disruption}")
 
 if __name__ == "__main__":
     create_map_processed()

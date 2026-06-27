@@ -34,15 +34,25 @@ def build_dashboard():
         df_top_10 = df_sorted.copy()
         df_top_10["rank"] = range(1, len(df_top_10) + 1)
         
+    # Calculate percentage of IDPs in top 5 LGAs
+    df_top_5 = df_top_10.head(5)
+    top_5_idp_population = int(df_top_5["idp_population"].sum())
+    pct_idps_top5 = (top_5_idp_population / total_idps * 100) if total_idps > 0 else 0.0
+    
+    # Calculate percentage of total risk in top 10 LGAs
+    total_risk_all = df["risk_score"].sum()
+    top_10_risk_sum = df_top_10["risk_score"].sum()
+    pct_risk_top10 = (top_10_risk_sum / total_risk_all * 100) if total_risk_all > 0 else 0.0
+        
     priority_table_rows = ""
     for idx, row in df_top_10.iterrows():
         rank = int(row['rank'])
         lga = row['LGA']
         risk_score = float(row['risk_score'])
         priority_table_rows += f"""                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{rank}</td>
-                            <td style="padding: 10px; border: 1px solid #ddd;">{lga}</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; text-align: right;">{risk_score:.4f}</td>
+                            <td style="padding: 12px 16px; border: 1px solid #e2e8f0; text-align: center;">{rank}</td>
+                            <td style="padding: 12px 16px; border: 1px solid #e2e8f0; font-weight: bold;">{lga}</td>
+                            <td style="padding: 12px 16px; border: 1px solid #e2e8f0; font-weight: bold; text-align: right;">{risk_score:.4f}</td>
                         </tr>\n"""
 
     # Generate table rows
@@ -134,12 +144,12 @@ def build_dashboard():
         .insight-box {{
             padding: 24px;
             background-color: #eff6ff;
-            border-left: 5px solid #2563eb;
+            border-left: 6px solid #2563eb;
             border-top: 1px solid #dbeafe;
             border-right: 1px solid #dbeafe;
             border-bottom: 1px solid #dbeafe;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.03);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.08), 0 2px 4px -1px rgba(37, 99, 235, 0.04);
         }}
         .insight-title {{
             font-size: 14px;
@@ -150,8 +160,9 @@ def build_dashboard():
             letter-spacing: 0.75px;
         }}
         .insight-text {{
-            font-size: 15px;
-            color: #1e293b;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
             line-height: 1.6;
             margin: 0;
         }}
@@ -283,6 +294,33 @@ def build_dashboard():
             margin-bottom: 0;
         }}
 
+        /* Recommendation Styles */
+        .recommendation-box {{
+            padding: 24px;
+            background-color: #f0fdf4;
+            border-left: 6px solid #16a34a;
+            border-top: 1px solid #dcfce7;
+            border-right: 1px solid #dcfce7;
+            border-bottom: 1px solid #dcfce7;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.05);
+        }}
+        .recommendation-title {{
+            font-size: 14px;
+            font-weight: 800;
+            color: #166534;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.75px;
+        }}
+        .recommendation-text {{
+            font-size: 15px;
+            color: #14532d;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: bold;
+        }}
+
         /* Limitations Styles */
         .limitations-box {{
             padding: 20px;
@@ -302,7 +340,7 @@ def build_dashboard():
         .limitations-list {{
             padding-left: 20px;
             margin: 0;
-            font-size: 13px;
+            font-size: 12px;
             color: #64748b;
             line-height: 1.6;
         }}
@@ -317,30 +355,6 @@ def build_dashboard():
 <body>
     <div class="dashboard-container">
         <h1>Education Disruption Dashboard – BAY States Nigeria</h1>
-        <div style="display:flex; justify-content:space-between; margin:20px 0; gap: 15px;">
-            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
-                <div style="font-size: 24px; font-weight: bold;">{total_idps:,}</div>
-                <div style="font-size: 14px; color: #666; margin-top: 5px;">Total IDPs</div>
-            </div>
-            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
-                <div style="font-size: 24px; font-weight: bold;">{total_schools:,}</div>
-                <div style="font-size: 14px; color: #666; margin-top: 5px;">Total Schools</div>
-            </div>
-            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
-                <div style="font-size: 24px; font-weight: bold;">{closed_percentage:.2f}%</div>
-                <div style="font-size: 14px; color: #666; margin-top: 5px;">Closed Schools (%)</div>
-            </div>
-            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; text-align: center;">
-                <div style="font-size: 24px; font-weight: bold;">{highest_risk_lga} ({highest_risk_state})</div>
-                <div style="font-size: 14px; color: #666; margin-top: 5px;">Highest Risk LGA</div>
-            </div>
-        </div>
-        <div style="background-color: #f4f6f7; padding: 20px; margin: 20px 0; border-radius: 6px;">
-            <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: bold; font-size: 18px; color: #0f172a;">Key Insight</h3>
-            <p style="margin: 0; line-height: 1.5;">
-                Education disruption is concentrated in a small number of LGAs in Borno State, where conflict intensity, displacement, and school closures overlap.
-            </p>
-        </div>
 
         <!-- 1. KPI Section -->
         <div class="section-wrapper">
@@ -348,6 +362,10 @@ def build_dashboard():
                 <div class="kpi-box">
                     <div class="kpi-value">{total_idps:,}</div>
                     <div class="kpi-label">Total IDP Population</div>
+                </div>
+                <div class="kpi-box" style="background-color: #fef2f2; border: 1px solid #fca5a5; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.05);">
+                    <div class="kpi-value" style="color: #dc2626; font-size: 38px;">{pct_idps_top5:.2f}%</div>
+                    <div class="kpi-label" style="color: #991b1b;">IDPs in Top 5 LGAs</div>
                 </div>
                 <div class="kpi-box">
                     <div class="kpi-value">{total_schools:,}</div>
@@ -364,12 +382,17 @@ def build_dashboard():
             </div>
         </div>
 
+        <!-- Data Insight -->
+        <div style="margin: -25px auto 30px auto; text-align: center; font-size: 16px; color: #0f172a; padding: 12px; background-color: #f1f5f9; border-radius: 6px; border: 1px solid #e2e8f0;">
+            <strong>Top 10 LGAs account for {pct_risk_top10:.1f}% of total education disruption risk.</strong>
+        </div>
+
         <!-- 2. Key Insight -->
         <div class="section-wrapper">
             <div class="insight-box">
                 <div class="insight-title">Key Insight</div>
                 <p class="insight-text">
-                    Education disruption is concentrated in a small number of LGAs in Borno State, where high conflict intensity overlaps with large IDP populations and high school closure rates.
+                    Education disruption is not evenly distributed. A small number of LGAs—primarily in Borno State—account for the highest levels of risk due to overlapping conflict exposure, large displaced populations, and high school closure rates. These areas should be prioritized for immediate education interventions.
                 </p>
             </div>
         </div>
@@ -384,14 +407,17 @@ def build_dashboard():
 
         <!-- Priority Table Section -->
         <div style="margin: 30px auto; width: 100%;">
-            <div class="section-title" style="width: 100%;">Top 10 Priority LGAs</div>
+            <div class="section-title" style="width: 100%;">Priority LGAs for Immediate Intervention</div>
+            <p style="font-size: 15px; color: #475569; margin-top: 0; margin-bottom: 15px; line-height: 1.5; text-align: left;">
+                These LGAs represent areas where education disruption is most severe and should be prioritized for intervention.
+            </p>
             <div style="overflow-x: auto; width: 100%;">
-                <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;">
+                <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px; border: 1px solid #e2e8f0;">
                     <thead>
                         <tr style="background-color: #f1f5f9;">
-                            <th style="padding: 12px 10px; border: 1px solid #ddd; font-weight: bold; text-align: center; width: 80px;">Rank</th>
-                            <th style="padding: 12px 10px; border: 1px solid #ddd; font-weight: bold; text-align: left;">LGA</th>
-                            <th style="padding: 12px 10px; border: 1px solid #ddd; font-weight: bold; text-align: right; width: 150px;">Risk Score</th>
+                            <th style="padding: 12px 16px; border: 1px solid #e2e8f0; font-weight: bold; text-align: center; width: 80px;">Rank</th>
+                            <th style="padding: 12px 16px; border: 1px solid #e2e8f0; font-weight: bold; text-align: left;">LGA Name</th>
+                            <th style="padding: 12px 16px; border: 1px solid #e2e8f0; font-weight: bold; text-align: right; width: 150px;">Risk Score</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -421,9 +447,9 @@ def build_dashboard():
                 <div class="usage-title">How to Use This Dashboard</div>
                 <ol class="usage-steps">
                     <li class="usage-step">Focus on red (high-risk) LGAs</li>
-                    <li class="usage-step">Identify LGAs with high IDP population</li>
-                    <li class="usage-step">Examine areas with many closed schools</li>
-                    <li class="usage-step">Prioritize these LGAs for intervention</li>
+                    <li class="usage-step">Refer to Priority LGAs table</li>
+                    <li class="usage-step">Check IDP concentration and school closures</li>
+                    <li class="usage-step">Use this to guide intervention planning</li>
                 </ol>
             </div>
         </div>
@@ -451,14 +477,24 @@ def build_dashboard():
             </div>
         </div>
 
+        <!-- Recommended Action Section -->
+        <div class="section-wrapper">
+            <div class="recommendation-box">
+                <div class="recommendation-title">Recommended Action</div>
+                <p class="recommendation-text">
+                    EBI should prioritize resource allocation and rapid education response interventions in the identified high-risk LGAs. Immediate actions should focus on reopening closed schools, supporting displaced children, and restoring access in conflict-affected areas.
+                </p>
+            </div>
+        </div>
+
         <!-- 7. Limitations Section -->
         <div class="section-wrapper" style="margin-bottom: 0;">
             <div class="limitations-box">
                 <div class="limitations-title">Limitations</div>
                 <ul class="limitations-list">
                     <li class="limitations-item">School status data may be incomplete</li>
-                    <li class="limitations-item">IDP data may not be up-to-date</li>
-                    <li class="limitations-item">Some LGAs may have limited data coverage</li>
+                    <li class="limitations-item">IDP data may not reflect recent displacement</li>
+                    <li class="limitations-item">Some LGAs may have missing data</li>
                 </ul>
             </div>
         </div>
