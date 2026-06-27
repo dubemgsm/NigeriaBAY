@@ -30,11 +30,11 @@
             font-size: 20px;
             color: #64748b;
             margin-top: 0;
-            margin-bottom: 50px;
+            margin-bottom: 24px;
             font-weight: 600;
         }
         .section-wrapper {
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
         .section-title {
             font-size: 22px;
@@ -53,7 +53,7 @@
         }
         .kpi-box {
             flex: 1;
-            padding: 24px 20px;
+            padding: 12px 16px;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             text-align: center;
@@ -61,10 +61,10 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
         .kpi-value {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 800;
             color: #2563eb;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             line-height: 1.1;
         }
         .kpi-label {
@@ -77,7 +77,7 @@
 
         /* Key Insight Styles */
         .insight-box {
-            padding: 24px;
+            padding: 14px 20px;
             background-color: #eff6ff;
             border-left: 6px solid #2563eb;
             border-top: 1px solid #dbeafe;
@@ -284,12 +284,93 @@
         .limitations-item:last-child {
             margin-bottom: 0;
         }
+        
+        /* Intro Section Styles */
+        .intro-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .intro-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+        .intro-subtitle {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+        .intro-text {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        .intro-text:last-child {
+            margin-bottom: 0;
+        }
+        .strategy-link-container {
+            margin-top: 16px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .strategy-link {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+        .strategy-link:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
         <h1>Borno, Adamawa and Yobe (BAY) states, Nigeria</h1>
         <p class="subtitle">Education disruption dashboard</p>
+
+        <!-- Background & About This Analysis Section -->
+        <div class="intro-container">
+            <h2 class="intro-title">Background</h2>
+            <p class="intro-text">
+                School age children in conflict-affected regions of North-East Nigeria (Borno, Adamawa, and Yobe (BAY) states) face severe and uneven barriers to education access. Armed conflict trigged by Boko Haram which means Western Education is prohibited in Hausa language has damaged school infrastructure, displaced millions of people, and created persistent insecurity that limits safe access to existing schools.
+            </p>
+            <p class="intro-text">
+                While education actors, including EBI, maintain strong field presence and local relationships, decision-making about where to prioritise interventions remains constrained by fragmented information flows and limited system-wide visibility.
+            </p>
+            <p class="intro-text">
+                This dashboard provides systemic, data-driven analysis at a glance to suggest priority intervention zones for improved planning.
+            </p>
+
+            <h2 class="intro-subtitle">About This Analysis</h2>
+            <p class="intro-text">
+                This analysis supports data-driven prioritization of education interventions by identifying LGAs where conflict, displacement, and school closures overlap.
+            </p>
+            
+            <div class="strategy-link-container">
+                <a href="README.md" class="strategy-link">
+                    View Full Strategy <span style="margin-left: 4px;">&rarr;</span>
+                </a>
+            </div>
+        </div>
 
         <!-- 1. KPI Section -->
         <div class="section-wrapper">
@@ -299,7 +380,7 @@
                     <div class="kpi-label">Total IDP Population</div>
                 </div>
                 <div class="kpi-box" style="background-color: #fef2f2; border: 1px solid #fca5a5; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.05);">
-                    <div class="kpi-value" style="color: #dc2626; font-size: 38px;">43.55%</div>
+                    <div class="kpi-value" style="color: #dc2626;">43.55%</div>
                     <div class="kpi-label" style="color: #991b1b;">IDPs in Top 5 LGAs</div>
                 </div>
                 <div class="kpi-box">
@@ -311,7 +392,7 @@
                     <div class="kpi-label">Percentage of Closed Schools</div>
                 </div>
                 <div class="kpi-box">
-                    <div class="kpi-value" style="font-size: 28px; padding-top: 6px; padding-bottom: 2px;">Gwoza (Borno)</div>
+                    <div class="kpi-value" style="font-size: 20px;">Gwoza (Borno)</div>
                     <div class="kpi-label">Highest Risk LGA</div>
                 </div>
             </div>
