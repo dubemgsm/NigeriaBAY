@@ -17,7 +17,8 @@ def export_top_10():
     df_sorted = df.sort_values(by="risk_score", ascending=False)
     
     # Select top 10
-    top_10 = df_sorted.head(10)
+    top_10 = df_sorted.head(10).copy()
+    top_10.insert(0, "rank", range(1, 11))
     
     # Save to top_10_lgas.csv
     top_10.to_csv(output_path, index=False)
@@ -26,12 +27,13 @@ def export_top_10():
     # Create HTML table format for display in dashboard
     # Select presentation columns
     cols_presentation = [
-        "LGA", "state", "risk_score", "school_age_population", 
+        "rank", "LGA", "state", "risk_score", "school_age_population", 
         "idp_population", "conflict_count", "closed_schools"
     ]
     df_html = top_10[cols_presentation].copy()
+    df_html["rank"] = df_html["rank"].map(lambda x: f"#{x}")
     df_html.columns = [
-        "LGA Name", "State", "Risk Score", "School-Age Pop", 
+        "Rank", "LGA Name", "State", "Risk Score", "School-Age Pop", 
         "IDP Population", "Conflict Count", "Closed Schools"
     ]
     

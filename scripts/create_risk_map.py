@@ -101,14 +101,14 @@ def create_map_processed():
             "fillColor": colormap(score) if pd.notnull(score) else "#ececec",
             "color": "#777777",
             "weight": 0.8,
-            "fillOpacity": 0.55
+            "fillOpacity": 0.80
         }
         
     def highlight_fn(feature):
         return {
             "weight": 2.5,
             "color": "#000000",
-            "fillOpacity": 0.75
+            "fillOpacity": 0.90
         }
 
     # Add permanent static LGA boundaries wireframe (always visible)
@@ -155,12 +155,37 @@ def create_map_processed():
         style_function=lambda x: {
             "fillColor": "transparent",
             "color": "#000000",
-            "weight": 3.0,
+            "weight": 4.5,
             "fillOpacity": 0.0
         },
         control=False,
         interactive=False
     ).add_to(m)
+
+    # Add text labels for top 5 LGAs
+    gdf_top5 = gdf_merged.sort_values(by="risk_score", ascending=False).head(5)
+    for rank, (idx, row) in enumerate(gdf_top5.iterrows(), 1):
+        centroid = row.geometry.representative_point()
+        folium.Marker(
+            location=[centroid.y, centroid.x],
+            icon=folium.DivIcon(
+                html=f"""
+                <div style="
+                    font-family: 'Helvetica Neue', Arial, sans-serif;
+                    font-size: 11px;
+                    font-weight: 900;
+                    color: #000000;
+                    text-align: center;
+                    white-space: nowrap;
+                    transform: translate(-50%, -50%);
+                    text-shadow: -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff, 2px 2px 0 #ffffff,
+                                 -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
+                ">
+                    #{rank} {row['LGA']}
+                </div>
+                """
+            )
+        ).add_to(m)
 
     # --------------------------------------------------------------------------
     # Add Points layers from data/processed
@@ -179,7 +204,7 @@ def create_map_processed():
             color="#ff7f0e", # Orange
             fill=True,
             fill_color="#ff7f0e",
-            fill_opacity=0.6,
+            fill_opacity=0.25,
             weight=0,
             tooltip=f"Conflict Event (Date: {row.get('event_dates', 'Unknown')})"
         ).add_to(conflict_group)
@@ -220,8 +245,8 @@ def create_map_processed():
             color=color,
             fill=True,
             fill_color=color,
-            fill_opacity=0.85,
-            weight=0.5,
+            fill_opacity=0.35,
+            weight=0.3,
             edge_color="#000000",
             tooltip=f"School in {row.get('lgs_names', 'Unknown')} ({status})",
             popup=folium.Popup(f"<b>School Status:</b> {status}", max_width=150)

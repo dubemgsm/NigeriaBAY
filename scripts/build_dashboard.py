@@ -28,8 +28,10 @@ def build_dashboard():
     
     # Generate table rows
     table_rows = ""
-    for idx, row in df_sorted.iterrows():
+    for rank, (idx, row) in enumerate(df_sorted.iterrows(), 1):
+        rank_class = f"rank-{rank}" if rank <= 3 else "rank-other"
         table_rows += f"""                        <tr>
+                            <td style="text-align: center;"><span class="rank-badge {rank_class}">#{rank}</span></td>
                             <td>{row['LGA']}</td>
                             <td>{row['state']}</td>
                             <td><strong>{row['risk_score']:.4f}</strong></td>
@@ -181,6 +183,20 @@ def build_dashboard():
         .top-lgas-table tr:hover {{
             background-color: #f8fafc;
         }}
+        .rank-badge {{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 11px;
+        }}
+        .rank-1 {{ background-color: #fef08a; color: #854d0e; border: 1px solid #eab308; }}
+        .rank-2 {{ background-color: #e2e8f0; color: #475569; border: 1px solid #94a3b8; }}
+        .rank-3 {{ background-color: #ffedd5; color: #c2410c; border: 1px solid #f97316; }}
+        .rank-other {{ background-color: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }}
 
         /* Risk Model Styles */
         .model-box {{
@@ -203,23 +219,14 @@ def build_dashboard():
             padding: 20px;
             margin-bottom: 16px;
         }}
-        .formula-title {{
-            font-size: 16px;
+        .formula-text {{
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 15px;
             font-weight: 700;
             color: #1e293b;
-            margin-bottom: 10px;
-        }}
-        .formula-list {{
-            list-style-type: none;
-            padding: 0;
+            line-height: 1.5;
             margin: 0;
-            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 14px;
-            color: #334155;
-            line-height: 1.7;
-        }}
-        .formula-item {{
-            padding-left: 8px;
+            text-align: center;
         }}
         .model-explanation {{
             font-size: 14px;
@@ -255,6 +262,36 @@ def build_dashboard():
         .usage-step:last-child {{
             margin-bottom: 0;
         }}
+
+        /* Limitations Styles */
+        .limitations-box {{
+            padding: 20px;
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            margin-top: 40px;
+        }}
+        .limitations-title {{
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        .limitations-list {{
+            padding-left: 20px;
+            margin: 0;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.6;
+        }}
+        .limitations-item {{
+            margin-bottom: 6px;
+        }}
+        .limitations-item:last-child {{
+            margin-bottom: 0;
+        }}
     </style>
 </head>
 <body>
@@ -266,7 +303,7 @@ def build_dashboard():
             <div class="kpi-container">
                 <div class="kpi-box">
                     <div class="kpi-value">{total_idps:,}</div>
-                    <div class="kpi-label">Total IDPs</div>
+                    <div class="kpi-label">Total IDP Population</div>
                 </div>
                 <div class="kpi-box">
                     <div class="kpi-value">{total_schools:,}</div>
@@ -274,7 +311,7 @@ def build_dashboard():
                 </div>
                 <div class="kpi-box">
                     <div class="kpi-value">{closed_percentage:.2f}%</div>
-                    <div class="kpi-label">% Closed Schools</div>
+                    <div class="kpi-label">Percentage of Closed Schools</div>
                 </div>
                 <div class="kpi-box">
                     <div class="kpi-value" style="font-size: 28px; padding-top: 6px; padding-bottom: 2px;">{highest_risk_lga} ({highest_risk_state})</div>
@@ -288,7 +325,7 @@ def build_dashboard():
             <div class="insight-box">
                 <div class="insight-title">Key Insight</div>
                 <p class="insight-text">
-                    Education disruption is concentrated in a small number of LGAs in Borno State, where conflict intensity, large displaced populations, and high school closure rates overlap.
+                    Education disruption is concentrated in a small number of LGAs in Borno State, where high conflict intensity overlaps with large IDP populations and high school closure rates.
                 </p>
             </div>
         </div>
@@ -301,13 +338,42 @@ def build_dashboard():
             </div>
         </div>
 
-        <!-- 4. Top 10 LGA Table -->
+        <!-- 4. Risk Model Section -->
+        <div class="section-wrapper">
+            <div class="model-box">
+                <div class="model-title">How Risk is Calculated</div>
+                <div class="formula-box">
+                    <div class="formula-text">
+                        Risk Score = 30% Conflict + 25% IDP Population + 25% School Closures + 20% School-age Population
+                    </div>
+                </div>
+                <p class="model-explanation">
+                    This model identifies areas where children are most at risk of losing access to education due to overlapping pressures.
+                </p>
+            </div>
+        </div>
+
+        <!-- 5. How to Use Section -->
+        <div class="section-wrapper">
+            <div class="usage-box">
+                <div class="usage-title">How to Use This Dashboard</div>
+                <ol class="usage-steps">
+                    <li class="usage-step">Focus on red (high-risk) LGAs</li>
+                    <li class="usage-step">Identify LGAs with high IDP population</li>
+                    <li class="usage-step">Check areas with high school closure rates</li>
+                    <li class="usage-step">Prioritize these LGAs for intervention</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 6. Top 10 LGA Table -->
         <div class="section-wrapper">
             <div class="section-title">Top 10 High-Risk LGAs</div>
             <div class="table-container">
                 <table class="top-lgas-table">
                     <thead>
                         <tr>
+                            <th style="text-align: center;">Rank</th>
                             <th>LGA Name</th>
                             <th>State</th>
                             <th>Risk Score</th>
@@ -323,35 +389,15 @@ def build_dashboard():
             </div>
         </div>
 
-        <!-- 5. Risk Model Section -->
-        <div class="section-wrapper">
-            <div class="model-box">
-                <div class="model-title">How Risk is Calculated</div>
-                <div class="formula-box">
-                    <div class="formula-title">Risk Score =</div>
-                    <ul class="formula-list">
-                        <li class="formula-item">&bull; 30% Conflict +</li>
-                        <li class="formula-item">&bull; 25% IDP Population +</li>
-                        <li class="formula-item">&bull; 25% School Closure Rate +</li>
-                        <li class="formula-item">&bull; 20% School-age Population</li>
-                    </ul>
-                </div>
-                <p class="model-explanation">
-                    This model identifies areas where children are most at risk of losing access to education.
-                </p>
-            </div>
-        </div>
-
-        <!-- 6. How to Use Section -->
-        <div class="section-wrapper">
-            <div class="usage-box">
-                <div class="usage-title">How to Use This Dashboard</div>
-                <ol class="usage-steps">
-                    <li class="usage-step">Focus on red (high-risk) LGAs</li>
-                    <li class="usage-step">Check IDP population levels</li>
-                    <li class="usage-step">Identify areas with high numbers of closed schools</li>
-                    <li class="usage-step">Prioritize these LGAs for intervention</li>
-                </ol>
+        <!-- 7. Limitations Section -->
+        <div class="section-wrapper" style="margin-bottom: 0;">
+            <div class="limitations-box">
+                <div class="limitations-title">Limitations</div>
+                <ul class="limitations-list">
+                    <li class="limitations-item">School status data may be incomplete</li>
+                    <li class="limitations-item">IDP data may not reflect recent displacement changes</li>
+                    <li class="limitations-item">Some rural LGAs may lack detailed data</li>
+                </ul>
             </div>
         </div>
     </div>

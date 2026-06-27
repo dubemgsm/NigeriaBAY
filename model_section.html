@@ -29,23 +29,14 @@
             padding: 16px;
             margin-bottom: 16px;
         }
-        .formula-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 8px;
-        }
-        .formula-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        .formula-text {
             font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 14px;
-            color: #4a5568;
-            line-height: 1.6;
-        }
-        .formula-item {
-            padding-left: 8px;
+            font-weight: 700;
+            color: #2d3748;
+            line-height: 1.5;
+            margin: 0;
+            text-align: center;
         }
         .model-explanation {
             font-size: 14px;
@@ -60,16 +51,12 @@
         <div class="model-box">
             <div class="model-title">How Risk is Calculated</div>
             <div class="formula-box">
-                <div class="formula-title">Risk Score =</div>
-                <ul class="formula-list">
-                    <li class="formula-item">&bull; 30% Conflict +</li>
-                    <li class="formula-item">&bull; 25% IDP Population +</li>
-                    <li class="formula-item">&bull; 25% School Closure Rate +</li>
-                    <li class="formula-item">&bull; 20% School-age Population</li>
-                </ul>
+                <div class="formula-text">
+                    Risk Score = 30% Conflict + 25% IDP Population + 25% School Closures + 20% School-age Population
+                </div>
             </div>
             <p class="model-explanation">
-                This model identifies areas where children are most at risk of losing access to education.
+                This model identifies areas where children are most at risk of losing access to education due to overlapping pressures.
             </p>
         </div>
     </div>

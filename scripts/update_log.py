@@ -3,7 +3,7 @@ import os
 import re
 
 def parse_transcript():
-    transcript_path = "/home/codespace/.gemini/antigravity-cli/brain/1f5ceb81-a5f0-4a9d-8a18-692e8a8bc8aa/.system_generated/logs/transcript_full.jsonl"
+    transcript_path = "/home/codespace/.gemini/antigravity-cli/brain/52e3ad8b-5012-46b1-be22-0156a4bbd081/.system_generated/logs/transcript_full.jsonl"
     log_dir = "/workspaces/NigeriaBAY/data/log"
     log_file = os.path.join(log_dir, "log.txt")
     
