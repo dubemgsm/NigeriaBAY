@@ -1,2 +1,7 @@
 # Ignore large raw data downloads
-data/raw/
+data/raw/**/*.zip
+data/raw/**/*.xlsx
+data/raw/**/*.dbf
+data/raw/*.zip
+data/raw/*.xlsx
+data/raw/*.dbf
